@@ -1,122 +1,33 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
-import './App.css'
+import { useState } from "react";
+import CharacterCard from "./components/CharacterCard";
+import DarkModeToggle from "./components/DarkModeToggle";
 
-function App() {
-  const [count, setCount] = useState(0)
+export default function App() {
+  const favCharacter = [
+    {id: 1, name: "Basil", image: "https://i.pinimg.com/736x/ea/bd/98/eabd98c3ba3644778ae416df23fef81b.jpg",},
+    {id: 2, name: "Cathy", image: "https://i.pinimg.com/736x/5b/a5/10/5ba510c1280b681d7c1f55c739010414.jpg",},
+    {id: 3, name: "Nagito", image: "https://i.pinimg.com/736x/69/f7/8b/69f78b2cf139c44f0442d668b31b485b.jpg"},
+    {id: 4, name: "Dante", image: "https://i.pinimg.com/736x/2d/36/e0/2d36e025bf45ab7a659e1feb02caa792.jpg"},
+  ];
+
+  const [isDark, setIsDark] = useState(false);
 
   return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
+    <div className={`flex h-screen items-center justify-center gap-4 transition-colors duration-500 ${isDark ? "bg-slate-900" : "bg-white"}`}>
 
-      <div className="ticks"></div>
+      {favCharacter.map((char) => (
+        <CharacterCard
+          key={char.id}
+          name={char.name}
+          image={char.image}
+          onClick={() => alert(`Klik: ${char.name}`)}
+        />
+      ))}
 
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
 
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
-  )
+
+      <DarkModeToggle onClick={() => setIsDark(!isDark)} isDark={isDark}/>
+
+    </div>
+  );
 }
-
-export default App
